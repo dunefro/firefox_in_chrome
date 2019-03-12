@@ -1,0 +1,15 @@
+FROM dunefro/chrome_fire:v1
+
+MAINTAINER dunefro
+
+RUN yum install xauth openssh-server firefox sed -y
+
+RUN sshd-keygen; /usr/sbin/sshd -f /etc/ssh/sshd_config; echo "/usr/sbin/sshd -f /etc/ssh/sshd_config" >> /root/.bashrc
+
+RUN sed -i 's/X11Forwarding no/X11Forwarding yes/' /etc/ssh/sshd_config; sed -i 's/X11UseLocalhost yes/X11UseLocalhost no/' /etc/ssh/sshd_config; /usr/sbin/sshd
+
+RUN dbus-uuidgen > /etc/machine-id 
+
+RUN xpra start --bind-tcp=0.0.0.0:3333 --html=on --start-child=firefox --systemd-run=no; echo "xpra start --bind-tcp=0.0.0.0:3333 --html=on --start-child=firefox --systemd-run=no" >> /root/.bashrc
+
+ 		 

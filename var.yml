@@ -1,0 +1,4 @@
+# Location where the dockerfile is present
+loc: /root/playbooks/firefox_in_chrome
+# Free port for exposing rhe docker container
+free_port: 1111

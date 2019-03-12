@@ -1,0 +1,28 @@
+- import_playbook: prerequisites.yml
+- hosts: localhost
+  tasks:
+   - include_vars: var.yml
+   - name: "Downloading basic xpra image"
+     docker_image:
+       name: dunefro/chrome_fire:v1 
+   - name: "Using Dockerfile"
+     docker_image: 
+       dockerfile: Dockerfile_web_firefox
+       name: browser_firefox:v1
+       path: "{{ loc }}"
+       pull: no
+       state: present
+   - name: "Launching firefox"
+     docker_container:
+       detach: yes
+       image: browser_firefox:v1
+       interactive: yes
+       tty: yes
+       name: firefox_container
+       published_ports: 
+        - " {{ free_port }}:3333"
+       state: started
+       
+       
+       
+ 
