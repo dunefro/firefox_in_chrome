@@ -1,5 +1,5 @@
 # firefox_in_chrome
-Ansible playbook and Dockerfile to launch firefox inside any other browser.
+Ansible playbook and Dockerfile to launch firefox inside any other browser.(Use Google Chrome for better reslts)
 Following Steps are required -
 1) DNS entries must be configured and hosts file can be used if container is to be laucnhed on different nodes.
 2) Completely fill the var.yml file which describe the path where the dockerfile currently is and the port which is free to get exposed.
